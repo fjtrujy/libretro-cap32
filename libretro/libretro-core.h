@@ -61,10 +61,17 @@ extern unsigned amstrad_devices[ PORTS_NUMBER ];
 extern PIXEL_TYPE *video_buffer;
 
 #ifdef M16B
+#if defined(ABGR)
+    #define RGB2COLOR(r, g, b)    ((r>>3) | ((g>>3)<<5) | ((b>>3)<<10))
+    #define RGB2RED(colour)       ((colour<<3) & 0xFF)
+    #define RGB2GREEN(colour)     (((colour>>5)<<2) & 0xFF)
+    #define RGB2BLUE(colour)      (((colour>>10)<<3) & 0xFF)
+#else
     #define RGB2COLOR(r, g, b)    ((b>>3) | ((g>>2)<<5) | ((r>>3)<<11))
     #define RGB2RED(colour)       (((colour>>11)<<3) & 0xFF)
     #define RGB2GREEN(colour)     (((colour>>5)<<2) & 0xFF)
     #define RGB2BLUE(colour)      ((colour<<3) & 0xFF)
+#endif
 #else
     #define RGB2COLOR(r, g, b)    (b | ((g << 8) | (r << 16)))
     #define RGB2RED(colour)       ((colour>>16) & 0xFF)

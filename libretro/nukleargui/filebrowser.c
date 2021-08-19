@@ -169,6 +169,10 @@ file_browser_init(struct file_browser *browser)
       const char *home = "sdmc:/";
 #elif defined(__SWITCH__)
       const char *home = "/";
+#elif defined(PS2)
+      static char cwd[256];
+      getcwd(cwd, sizeof(cwd));
+      const char *home = cwd;
 #else
       /* load files and sub-directory list */
       const char *home = getenv("HOME");

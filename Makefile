@@ -169,6 +169,17 @@ else ifeq ($(platform), psl1ght)
 	STATIC_LINKING = 1
 	HAVE_COMPAT = 1
 
+# PS2
+else ifeq ($(platform), ps2)
+	TARGET := $(TARGET_NAME)_libretro_$(platform).a
+	CC = mips64r5900el-ps2-elf-gcc$(EXE_EXT)
+	CC_AS = mips64r5900el-ps2-elf-gcc$(EXE_EXT)
+	CXX = mips64r5900el-ps2-elf-g++$(EXE_EXT)
+	AR = mips64r5900el-ps2-elf-ar$(EXE_EXT)
+	PLATFORM_DEFINES := -G0 -DPS2 -DM16B -DLOWRES -DABGR
+	STATIC_LINKING = 1
+	HAVE_COMPAT = 1
+
 # PSP
 else ifeq ($(platform), psp1)
 	TARGET := $(TARGET_NAME)_libretro_$(platform).a
